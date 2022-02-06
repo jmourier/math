@@ -35,7 +35,7 @@ function go()
 }
 
 function nQuestion(){
-    let AddOperation = document.getElementById("operation");
+    let AddOperation = document.getElementById("addition");
     let number = Math.floor(Math.random() * 11);
     goodAnswer = number + 6;
     AddOperation.innerHTML = number + "+ 6 ="; 
