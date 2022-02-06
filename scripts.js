@@ -9,7 +9,7 @@ window.onload = function()
 {
   scoreSaved = localStorage.getItem("maxScore");
   if (scoreSaved != undefined) maxScore = scoreSaved;
-  document.getElementById("maxScore").innerHTML = "Ton meilleur score : "+ maxscore;
+  document.getElementById("maxScore").innerHTML = "Ton meilleur score : "+ maxScore;
 }
 
 
