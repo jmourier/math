@@ -2,11 +2,13 @@
 let time = 10;
 let timeInterval;
 let score = 0;
+let maxScore = 0;
 let goodAnswer = 0;
-let nbMaxquestion = 10; 
+
 window.onload = function()
 {
   scoreSaved = localStorage.getItem("maxScore");
+  if (scoreSaved != undefined) maxScore = scoreSaved;
   document.getElementById("maxScore").innerHTML = "Ton meilleur score : "+ maxscore;
 }
 
