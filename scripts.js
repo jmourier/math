@@ -18,8 +18,6 @@ function go()
   
   nQuestion();
   document.getElementById("goBtn").disabled = true;
-  
-  
   let timeDisplay = document.getElementById("timeDisplay");
   timeDisplay.hidden = false;
   timeInterval = setInterval(function(){
@@ -33,9 +31,10 @@ function go()
       document.getElementById("x3").disabled = true;
       document.getElementById("x4").disabled = true;
     }
-  },1000)
-  
-  nQuestion(){
+  },1000)  
+}
+
+function nQuestion(){
     let AddOperation = document.getElementById("operation");
     let number = Math.floor(Math.random() * 11);
     goodAnswer = number+6;
@@ -72,6 +71,3 @@ function go()
    nQuestion(); 
     
   }
-  
-  
-}
