@@ -7,18 +7,20 @@
 	<script type="text/javascript" src="scripts.js"></script>																					
 	</head>
 <body>
-	<button onclick="go()">Commencer</button>
+	<div id="maxScore">Ton meilleur score  : 0 </div>																						 
+	<div id="actuScore">Ton score : 0 </div>					       
+	<button id="goBtn" onclick="go()">Commencer</button>
 	<div id="timeDisplay" hidden>Temps restant : 10 </div>
 	<br>
 		Question n Y
 	<br>
 		<div id="addition">X + 6</div>
 	<br>
-		<button id="x1">x1</button>
-		<button id="x2">x2</button>
+		<button onclick="checkAnswer(1)" id="x1">x1</button>
+		<button onclick="checkAnswer(2)" id="x2">x2</button>
 	<br>		
-		<button id="x3">x3</button>
-		<button id="x4">x4</button>
+		<button onclick="checkAnswer(3)" id="x3">x3</button>
+		<button onclick="checkAnswer(4)" id="x4">x4</button>
 </body>
 </html>
 	
