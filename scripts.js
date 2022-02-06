@@ -52,9 +52,6 @@ function nQuestion(){
     document.getElementById("x4").innerHTML = badAnswer4;
     
     
-    
-    ftrandomAnswer =;
-    
     let goodAnswerTab = Math.floor(Math.random() * 4)+1;
     let goodAnswerId ="x" + goodAnswerTab;
     document.getElementById(goodAnswerId).innerHTML = goodAnswer;
