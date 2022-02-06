@@ -8,7 +8,7 @@ function go()
   timeDisplay.hidden = false;
   setInterval(function(){
     time-=1;
-    timeDisplay.innerHTML = "Temps restant : " + timeLeft;
+    timeDisplay.innerHTML = "Temps restant : " + time;
   },1000)
   
   
