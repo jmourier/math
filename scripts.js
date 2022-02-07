@@ -1,9 +1,10 @@
 
-let time = 10;
-let timeInterval;
+//let time = 10;
+//let timeInterval;
 let score = 0;
 let maxScore = 0;
 let goodAnswer = 0;
+let maxAnswers = 5;
 
 window.onload = function()
 {
@@ -25,7 +26,7 @@ function go()
     timeDisplay.innerHTML = "Temps restant : " + time;
     if (time == 0)
     {
-      clearInterval(timerInterval);
+      clearInterval(timeInterval);
       document.getElementById("x1").disabled = true;
       document.getElementById("x2").disabled = true;
       document.getElementById("x3").disabled = true;
@@ -41,10 +42,10 @@ function nQuestion(){
     AddOperation.innerHTML = number + "+ 6 ="; 
     
     //reponse
-    let badAnswer1 = Math.floor(Math.random() * 11)+6;
-    let badAnswer2 = Math.floor(Math.random() * 11)+6;
-    let badAnswer3 = Math.floor(Math.random() * 11)+6;
-    let badAnswer4 = Math.floor(Math.random() * 11)+6;
+    let badAnswer1 = Math.floor(Math.random() * 11) + 6;
+    let badAnswer2 = Math.floor(Math.random() * 11) + 6;
+    let badAnswer3 = Math.floor(Math.random() * 11) + 6;
+    let badAnswer4 = Math.floor(Math.random() * 11) + 6;
     
     document.getElementById("x1").innerHTML = badAnswer1;
     document.getElementById("x2").innerHTML = badAnswer2;
