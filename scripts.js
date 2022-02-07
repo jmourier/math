@@ -1,10 +1,10 @@
 
-//let time = 10;
-//let timeInterval;
+let time = 10;
+let timeInterval;
 let score = 0;
 let maxScore = 0;
 let goodAnswer = 0;
-let maxAnswers = 5;
+
 
 window.onload = function()
 {
