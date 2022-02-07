@@ -2,28 +2,45 @@
 	<head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width",initial-scale=1.0">
-	<title>Addition : X + 6 </title>
+	<title>Addition</title>
 	<link rel="stylesheet" href="styles.css">
 	<script type="text/javascript" src="scripts.js"></script>																					
 	</head>
 <body>
-	<div id="maxScore">Ton meilleur score  : 0 </div>																						 
-	<div id="actuScore">Ton score : 0 </div>					       
-	<button id="goBtn" onclick="go()">Commencer</button>
-	<div id="timeDisplay" hidden>Temps restant : 10 </div>
-	<br>
-		<H1> Addition de + 6 </H1>
-	<br>
-		<div id="addition">0 + 6</div>
-	<br>
-		<h2>Cliquer sur la bonne réponse : </h2>
-	<br>
-		<button onclick="checkAnswer(1)" id="x1">0</button>
-		<button onclick="checkAnswer(2)" id="x2">0</button>
-	<br>		
-		<button onclick="checkAnswer(3)" id="x3">0</button>
-		<button onclick="checkAnswer(4)" id="x4">0</button>
+
+  <div class="container">
+    <div id="Addition">
+      <h1><span>Q</span>uiz <i class="far fa-question-circle"></i></h1>
+
+      <h2 id="question"></h2>
+        
+      <h3 id="score"></h3>
+
+      <div class="choices">
+        <button id="guess0" class="btn">        
+          <p id="choice0"></p>
+        </button>
+
+        <button id="guess1" class="btn">
+          <p id="choice1"></p>
+        </button>
+          
+        <button id="guess2" class="btn">
+          <p id="choice2"></p>
+        </button>
+          
+        <button id="guess3" class="btn">
+          <p id="choice3"></p>
+        </button>
+      </div>
 </body>
 </html>
-	
-	
+			 
+
+      <p id="progress"></p>
+
+    </div>
+  </div>
+   
+</body>
+
