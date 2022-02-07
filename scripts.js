@@ -1,71 +1,104 @@
-
-let time = 10;
-let timeInterval;
-let score = 0;
-let maxScore = 0;
-let goodAnswer = 0;
-
-
-window.onload = function()
-{
-  scoreSaved = localStorage.getItem("maxScore");
-  if (scoreSaved != undefined) maxScore = scoreSaved;
-  document.getElementById("maxScore").innerHTML = "Ton meilleur score : "+ maxScore;
-}
-
-
-function go()
-{
-  
-  nQuestion();
-  document.getElementById("goBtn").disabled = true;
-  let timeDisplay = document.getElementById("timeDisplay");
-  timeDisplay.hidden = false;
-  timeInterval = setInterval(function(){
-    time-=1;
-    timeDisplay.innerHTML = "Temps restant : " + time;
-    if (time == 0)
-    {
-      clearInterval(timeInterval);
-      document.getElementById("x1").disabled = true;
-      document.getElementById("x2").disabled = true;
-      document.getElementById("x3").disabled = true;
-      document.getElementById("x4").disabled = true;
-    }
-  },1000)  
-}
-
-function nQuestion(){
-    let AddOperation = document.getElementById("addition");
-    let number = Math.floor(Math.random() * 11);
-    goodAnswer = number + 6;
-    AddOperation.innerHTML = number + "+ 6 ="; 
-    
-    //reponse
-    let badAnswer1 = Math.floor(Math.random() * 11) + 6;
-    let badAnswer2 = Math.floor(Math.random() * 11) + 6;
-    let badAnswer3 = Math.floor(Math.random() * 11) + 6;
-    let badAnswer4 = Math.floor(Math.random() * 11) + 6;
-    
-    document.getElementById("x1").innerHTML = badAnswer1;
-    document.getElementById("x2").innerHTML = badAnswer2;
-    document.getElementById("x3").innerHTML = badAnswer3;
-    document.getElementById("x4").innerHTML = badAnswer4;
-    
-    
-    let goodAnswerTab = Math.floor(Math.random() * 4)+1;
-    let goodAnswerId ="x" + goodAnswerTab;
-    document.getElementById(goodAnswerId).innerHTML = goodAnswer;
-    
-  }
-  function checkAnswer(buttonIndex)
-  {
-   let  answer = document.getElementById("x" + buttonIndex).innerHTML;
-   if (answer == goodAnswer) score +=1;
-   document.getElementById("actuScore").innerHTML = "Ton score :" + score;
-   if (score > maxScore) maxScore = score;
-   document.getElementById("maxScore").innerHTML = "Ton meilleur score  :" + maxScore;
+class Question {
+  constructor(text, choices, answer, add, number) {
+    this.text = text;
+    this.choices = choices;
+    this.answer = answer;
    
-   nQuestion(); 
-    
   }
+  
+  isCorrectAnswer(choice) {
+    return this.answer === choice;
+  }
+}
+
+
+let questions = [
+new Question("calcul 10 + 6", [Math.floor(Math.random() * 11) + 5, 10 + 6, Math.floor(Math.random() * 11) + 7,Math.floor(Math.random() * 11) + 3], 10 + 6 ),
+new Question("calcul 5 + 6", [Math.floor(Math.random() * 11) + 4,Math.floor(Math.random() * 11) + 7, 5 + 6,Math.floor(Math.random() * 11) + 9], 5 + 6 ),
+new Question("calcul 7 + 6", [Math.floor(Math.random() * 11) + 8,Math.floor(Math.random() * 11) + 1,Math.floor(Math.random() * 11) + 2,7 + 6], 7 + 6 ),
+new Question("calcul 8 + 6", [Math.floor(Math.random() * 11) + 6,Math.floor(Math.random() * 11) + 5, 8 + 6,Math.floor(Math.random() * 11) + 6], 8 + 6 ),
+new Question("calcul 9 + 6", [9 + 6,Math.floor(Math.random() * 11) ,Math.floor(Math.random() * 11) + 7,Math.floor(Math.random() * 11) + 2], 9 + 6 ),
+new Question("calcul 1 + 6", [Math.floor(Math.random() * 11) + 8,1 + 6,Math.floor(Math.random() * 11) + 3,Math.floor(Math.random() * 11)], 1 + 6 ),
+new Question("calcul 3 + 6", [Math.floor(Math.random() * 11) + 5,Math.floor(Math.random() * 11) + 6, 3 + 6,Math.floor(Math.random() * 11) + 7], 3 + 6 ),
+new Question("calcul 4 + 6", [Math.floor(Math.random() * 11),4 + 6,Math.floor(Math.random() * 11) + 3,Math.floor(Math.random() * 11) + 8], 4 + 6 ),
+new Question("calcul 2 + 6", [Math.floor(Math.random() * 11) + 5,Math.floor(Math.random() * 11) + 6,Math.floor(Math.random() * 11) + 3,2 + 6], 2 + 6 ),
+new Question("calcul 6 + 6", [Math.floor(Math.random() * 11) + 9,Math.floor(Math.random() * 11) + 5, 6 + 6,Math.floor(Math.random() * 11) + 3], 6 + 6 ),
+new Question("calcul 0 + 6", [0 + 6,Math.floor(Math.random() * 11) + 2,Math.floor(Math.random() * 11) + 3,Math.floor(Math.random() * 11) + 2], 0 + 6 )
+
+ 
+];
+  
+console.log(questions);
+
+class Quiz {
+  constructor(questions) {
+    this.score = 0;
+    this.questions = questions;
+    this.currentQuestionIndex = 0;
+  }
+  getCurrentQuestion() {
+    return this.questions[this.currentQuestionIndex];
+  }
+  guess(answer) {
+    if (this.getCurrentQuestion().isCorrectAnswer(answer)) {
+      this.score++;
+    }
+    this.currentQuestionIndex++;
+  }
+  hasEnded() {
+    return this.currentQuestionIndex >= this.questions.length;
+  }
+}
+
+// Regroup all  functions relative to the App Display
+const display = {
+  elementShown: function(id, text) {
+    let element = document.getElementById(id);
+    element.innerHTML = text;
+  },
+  endQuiz: function() {
+    endQuizHTML = `
+      <h1>Quiz terminé !</h1>
+      <h3> Votre score est de : ${quiz.score} / ${quiz.questions.length}</h3>`;
+    this.elementShown("quiz", endQuizHTML);
+  },
+  question: function() {
+    this.elementShown("question", quiz.getCurrentQuestion().text);
+  },
+  choices: function() {
+    let choices = quiz.getCurrentQuestion().choices;
+
+    guessHandler = (id, guess) => {
+      document.getElementById(id).onclick = function() {
+        quiz.guess(guess);
+        quizApp();
+      }
+    }
+    // display choices and handle guess
+    for(let i = 0; i < choices.length; i++) {
+      this.elementShown("choice" + i, choices[i]);
+      guessHandler("guess" + i, choices[i]);
+    }
+  },
+  progress: function() {
+    let currentQuestionNumber = quiz.currentQuestionIndex + 1;
+    this.elementShown("progress", "Question " + currentQuestionNumber + " sur " + quiz.questions.length);
+  },
+};
+
+// Game logic
+quizApp = () => {
+  if (quiz.hasEnded()) {
+    display.endQuiz();
+  } else {
+    display.question();
+    display.choices();
+    display.progress();
+  } 
+}
+// Create Quiz
+let quiz = new Quiz(questions);
+quizApp();
+
+console.log(quiz);
+
