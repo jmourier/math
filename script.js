@@ -9,10 +9,17 @@ class Question {
   }
 }
 let questions = [
-  new Question("Quelle méthode Javascript permet de filtrer les éléments d'un tableau", ["indexOf()", "map()", "filter()", "reduce()"], "filter()"),
-  new Question("Quelle méthode Javascript permet de vérifier si un élément figure dans un tableau", ["isNaN()","includes()", "findIndex()", "isOdd()"], "includes()"),
-  new Question("Quelle méthode transforme du JSON en un objet Javascript ?", ["JSON.parse()","JSON.stringify()", "JSON.object()", "JSON.toJS"], "JSON.parse()"),
-  new Question("Quel objet Javascript permet d'arrondir à l'entier le plus proche", ["Math.ceil()","Math.floor()", "Math.round()", "Math.random()"], "Math.round()")
+new Question("calcul 10 + 6", [Math.floor(Math.random() * 11) + 5, 10 + 6, Math.floor(Math.random() * 11) + 7,Math.floor(Math.random() * 11) + 3], 10 + 6 ),
+new Question("calcul 5 + 6", [Math.floor(Math.random() * 11) + 4,Math.floor(Math.random() * 11) + 7, 5 + 6,Math.floor(Math.random() * 11) + 9], 5 + 6 ),
+new Question("calcul 7 + 6", [Math.floor(Math.random() * 11) + 8,Math.floor(Math.random() * 11) + 1,Math.floor(Math.random() * 11) + 2,7 + 6], 7 + 6 ),
+new Question("calcul 8 + 6", [Math.floor(Math.random() * 11) + 6,Math.floor(Math.random() * 11) + 5, 8 + 6,Math.floor(Math.random() * 11) + 6], 8 + 6 ),
+new Question("calcul 9 + 6", [9 + 6,Math.floor(Math.random() * 11) ,Math.floor(Math.random() * 11) + 7,Math.floor(Math.random() * 11) + 2], 9 + 6 ),
+new Question("calcul 1 + 6", [Math.floor(Math.random() * 11) + 8,1 + 6,Math.floor(Math.random() * 11) + 3,Math.floor(Math.random() * 11)], 1 + 6 ),
+new Question("calcul 3 + 6", [Math.floor(Math.random() * 11) + 5,Math.floor(Math.random() * 11) + 6, 3 + 6,Math.floor(Math.random() * 11) + 7], 3 + 6 ),
+new Question("calcul 4 + 6", [Math.floor(Math.random() * 11),4 + 6,Math.floor(Math.random() * 11) + 3,Math.floor(Math.random() * 11) + 8], 4 + 6 ),
+new Question("calcul 2 + 6", [Math.floor(Math.random() * 11) + 5,Math.floor(Math.random() * 11) + 6,Math.floor(Math.random() * 11) + 3,2 + 6], 2 + 6 ),
+new Question("calcul 6 + 6", [Math.floor(Math.random() * 11) + 9,Math.floor(Math.random() * 11) + 5, 6 + 6,Math.floor(Math.random() * 11) + 3], 6 + 6 ),
+new Question("calcul 0 + 6", [0 + 6,Math.floor(Math.random() * 11) + 2,Math.floor(Math.random() * 11) + 3,Math.floor(Math.random() * 11) + 2], 0 + 6 )
 ];
 
 class Quiz {
@@ -66,7 +73,7 @@ const display = {
   },
   progress: function() {
     let currentQuestionNumber = quiz.currentQuestionIndex + 1;
-    this.elementShown("progress", "Question " + currentQuestionNumber + " sur " + quiz.questions.length);
+    this.elementShown("progress", "Exercice " + currentQuestionNumber + " sur " + quiz.questions.length);
   },
 };
 
