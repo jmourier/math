@@ -3,11 +3,15 @@ class Question {
     this.text = text;
     this.choices = choices;
     this.answer = answer;
+   
   }
+  
   isCorrectAnswer(choice) {
     return this.answer === choice;
   }
 }
+
+
 let questions = [
 new Question("calcul 10 + 6", [Math.floor(Math.random() * 11) + 5, 10 + 6, Math.floor(Math.random() * 11) + 7,Math.floor(Math.random() * 11) + 3], 10 + 6 ),
 new Question("calcul 5 + 6", [Math.floor(Math.random() * 11) + 4,Math.floor(Math.random() * 11) + 7, 5 + 6,Math.floor(Math.random() * 11) + 9], 5 + 6 ),
@@ -20,7 +24,11 @@ new Question("calcul 4 + 6", [Math.floor(Math.random() * 11),4 + 6,Math.floor(Ma
 new Question("calcul 2 + 6", [Math.floor(Math.random() * 11) + 5,Math.floor(Math.random() * 11) + 6,Math.floor(Math.random() * 11) + 3,2 + 6], 2 + 6 ),
 new Question("calcul 6 + 6", [Math.floor(Math.random() * 11) + 9,Math.floor(Math.random() * 11) + 5, 6 + 6,Math.floor(Math.random() * 11) + 3], 6 + 6 ),
 new Question("calcul 0 + 6", [0 + 6,Math.floor(Math.random() * 11) + 2,Math.floor(Math.random() * 11) + 3,Math.floor(Math.random() * 11) + 2], 0 + 6 )
+
+ 
 ];
+  
+console.log(questions);
 
 class Quiz {
   constructor(questions) {
@@ -42,6 +50,7 @@ class Quiz {
   }
 }
 
+// Regroup all  functions relative to the App Display
 const display = {
   elementShown: function(id, text) {
     let element = document.getElementById(id);
@@ -65,7 +74,7 @@ const display = {
         quizApp();
       }
     }
-    // affichage choix + prise en compte du choix
+    // display choices and handle guess
     for(let i = 0; i < choices.length; i++) {
       this.elementShown("choice" + i, choices[i]);
       guessHandler("guess" + i, choices[i]);
@@ -73,7 +82,7 @@ const display = {
   },
   progress: function() {
     let currentQuestionNumber = quiz.currentQuestionIndex + 1;
-    this.elementShown("progress", "Exercice " + currentQuestionNumber + " sur " + quiz.questions.length);
+    this.elementShown("progress", "Question " + currentQuestionNumber + " sur " + quiz.questions.length);
   },
 };
 
@@ -90,3 +99,6 @@ quizApp = () => {
 // Create Quiz
 let quiz = new Quiz(questions);
 quizApp();
+
+console.log(quiz);
+
