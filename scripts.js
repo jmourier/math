@@ -1,71 +1,104 @@
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap');
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  text-align: center;
+class Question {
+  constructor(text, choices, answer, add, number) {
+    this.text = text;
+    this.choices = choices;
+    this.answer = answer;
+   
+  }
+  
+  isCorrectAnswer(choice) {
+    return this.answer === choice;
+  }
 }
-body {
-  font-family: 'Josefin Sans', sans-serif;
-  display: grid;
-  align-items: center;
-  justify-items: center;
-  min-height: 100vh;
-  background: #2f3542;
-  color: #dfe4ea;
 
-  h1 {
-    margin-bottom: 3rem;
-    text-transform: uppercase;
-    font-size: 3rem;
 
-    span, i {
-      color: #ffa502;
+let questions = [
+new Question("calcul 10 + 6", [Math.floor(Math.random() * 11) + 5, 10 + 6, Math.floor(Math.random() * 11) + 7,Math.floor(Math.random() * 11) + 3], 10 + 6 ),
+new Question("calcul 5 + 6", [Math.floor(Math.random() * 11) + 4,Math.floor(Math.random() * 11) + 7, 5 + 6,Math.floor(Math.random() * 11) + 9], 5 + 6 ),
+new Question("calcul 7 + 6", [Math.floor(Math.random() * 11) + 8,Math.floor(Math.random() * 11) + 1,Math.floor(Math.random() * 11) + 2,7 + 6], 7 + 6 ),
+new Question("calcul 8 + 6", [Math.floor(Math.random() * 11) + 6,Math.floor(Math.random() * 11) + 5, 8 + 6,Math.floor(Math.random() * 11) + 6], 8 + 6 ),
+new Question("calcul 9 + 6", [9 + 6,Math.floor(Math.random() * 11) ,Math.floor(Math.random() * 11) + 7,Math.floor(Math.random() * 11) + 2], 9 + 6 ),
+new Question("calcul 1 + 6", [Math.floor(Math.random() * 11) + 8,1 + 6,Math.floor(Math.random() * 11) + 3,Math.floor(Math.random() * 11)], 1 + 6 ),
+new Question("calcul 3 + 6", [Math.floor(Math.random() * 11) + 5,Math.floor(Math.random() * 11) + 6, 3 + 6,Math.floor(Math.random() * 11) + 7], 3 + 6 ),
+new Question("calcul 4 + 6", [Math.floor(Math.random() * 11),4 + 6,Math.floor(Math.random() * 11) + 3,Math.floor(Math.random() * 11) + 8], 4 + 6 ),
+new Question("calcul 2 + 6", [Math.floor(Math.random() * 11) + 5,Math.floor(Math.random() * 11) + 6,Math.floor(Math.random() * 11) + 3,2 + 6], 2 + 6 ),
+new Question("calcul 6 + 6", [Math.floor(Math.random() * 11) + 9,Math.floor(Math.random() * 11) + 5, 6 + 6,Math.floor(Math.random() * 11) + 3], 6 + 6 ),
+new Question("calcul 0 + 6", [0 + 6,Math.floor(Math.random() * 11) + 2,Math.floor(Math.random() * 11) + 3,Math.floor(Math.random() * 11) + 2], 0 + 6 )
+
+ 
+];
+  
+console.log(questions);
+
+class Quiz {
+  constructor(questions) {
+    this.score = 0;
+    this.questions = questions;
+    this.currentQuestionIndex = 0;
+  }
+  getCurrentQuestion() {
+    return this.questions[this.currentQuestionIndex];
+  }
+  guess(answer) {
+    if (this.getCurrentQuestion().isCorrectAnswer(answer)) {
+      this.score++;
     }
+    this.currentQuestionIndex++;
   }
-  h3 {
-    color: #ffa502;
-    font-size: 1.5rem;
+  hasEnded() {
+    return this.currentQuestionIndex >= this.questions.length;
   }
-  .container {
-    .choices {
-      display: flex;
-      flex-wrap: wrap;
-      margin: 3rem auto 3rem;
-      width: 500px;
+}
 
-      button {
-        flex: 1 0 45%;
-        width: 200px;
-        height: 80px;
-        border-radius: 5px;
-        cursor: pointer;
-        border: none;
-        margin: .4rem;
-        outline: none;
-        background: #dfe4ea;
-        user-select: none;
-        font-weight: 600;
+// Regroup all  functions relative to the App Display
+const display = {
+  elementShown: function(id, text) {
+    let element = document.getElementById(id);
+    element.innerHTML = text;
+  },
+  endQuiz: function() {
+    endQuizHTML = `
+      <h1>Quiz terminé !</h1>
+      <h3> Votre score est de : ${quiz.score} / ${quiz.questions.length}</h3>`;
+    this.elementShown("quiz", endQuizHTML);
+  },
+  question: function() {
+    this.elementShown("question", quiz.getCurrentQuestion().text);
+  },
+  choices: function() {
+    let choices = quiz.getCurrentQuestion().choices;
 
-        &:hover {
-          background: #ffa502;
-          transition: .5s;
-        }
-        &:active {
-          transform: scale(.9);
-          transition: transform .1s;
-        }
-      
-        p {
-          font-size: 1.3rem;
-          margin: 0;
-        }
+    guessHandler = (id, guess) => {
+      document.getElementById(id).onclick = function() {
+        quiz.guess(guess);
+        quizApp();
       }
     }
-  }
-  #progress {
-    font-size: 1.3rem;
-    color: #ffa502;
-  }
+    // display choices and handle guess
+    for(let i = 0; i < choices.length; i++) {
+      this.elementShown("choice" + i, choices[i]);
+      guessHandler("guess" + i, choices[i]);
+    }
+  },
+  progress: function() {
+    let currentQuestionNumber = quiz.currentQuestionIndex + 1;
+    this.elementShown("progress", "Question " + currentQuestionNumber + " sur " + quiz.questions.length);
+  },
+};
+
+// Game logic
+quizApp = () => {
+  if (quiz.hasEnded()) {
+    display.endQuiz();
+  } else {
+    display.question();
+    display.choices();
+    display.progress();
+  } 
 }
+// Create Quiz
+let quiz = new Quiz(questions);
+quizApp();
+
+console.log(quiz);
+
