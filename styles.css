@@ -18,11 +18,7 @@ body {
   h1 {
     margin-bottom: 3rem;
     text-transform: uppercase;
-    font-size: 3rem;
-
-    span, i {
-      color: #ffa502;
-    }
+    font-size: 3rem
   }
   h3 {
     color: #ffa502;
