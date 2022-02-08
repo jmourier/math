@@ -46,6 +46,9 @@ class Quiz {
 
 const display = {
   elementShown: function(id, text) {
+    console.log(id);
+    console.log(text);
+    console.log(document.getElementById(id));
     let element = document.getElementById(id);
     element.innerHTML = text;
   },
