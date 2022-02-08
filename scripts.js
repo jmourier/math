@@ -1,17 +1,13 @@
 class Question {
-  constructor(text, choices, answer, add, number) {
+  constructor(text, choices, answer) {
     this.text = text;
     this.choices = choices;
     this.answer = answer;
-   
   }
-  
   isCorrectAnswer(choice) {
     return this.answer === choice;
   }
 }
-
-
 let questions = [
 new Question("calcul 10 + 6", [Math.floor(Math.random() * 11) + 5, 10 + 6, Math.floor(Math.random() * 11) + 7,Math.floor(Math.random() * 11) + 3], 10 + 6 ),
 new Question("calcul 5 + 6", [Math.floor(Math.random() * 11) + 4,Math.floor(Math.random() * 11) + 7, 5 + 6,Math.floor(Math.random() * 11) + 9], 5 + 6 ),
@@ -27,8 +23,6 @@ new Question("calcul 0 + 6", [0 + 6,Math.floor(Math.random() * 11) + 2,Math.floo
 
  
 ];
-  
-console.log(questions);
 
 class Quiz {
   constructor(questions) {
@@ -50,7 +44,6 @@ class Quiz {
   }
 }
 
-// Regroup all  functions relative to the App Display
 const display = {
   elementShown: function(id, text) {
     let element = document.getElementById(id);
@@ -74,7 +67,7 @@ const display = {
         quizApp();
       }
     }
-    // display choices and handle guess
+    // affichage choix + prise en compte du choix
     for(let i = 0; i < choices.length; i++) {
       this.elementShown("choice" + i, choices[i]);
       guessHandler("guess" + i, choices[i]);
@@ -99,6 +92,3 @@ quizApp = () => {
 // Create Quiz
 let quiz = new Quiz(questions);
 quizApp();
-
-console.log(quiz);
-
